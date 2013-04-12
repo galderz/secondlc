@@ -1,0 +1,16 @@
+RULE trace get connection entry
+CLASS org.hibernate.engine.jdbc.internal.LogicalConnectionImpl
+METHOD getConnection
+AT ENTRY
+IF true
+DO Thread.sleep(1)
+#traceln("[byteman] slow down database access...");
+ENDRULE
+ 
+#RULE trace get connection exit
+#CLASS org.hibernate.engine.jdbc.internal.LogicalConnectionImpl
+#METHOD getConnection
+#AT EXIT
+#IF true
+#DO traceln("exiting obtainConnection")
+#ENDRULE

@@ -1,0 +1,157 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+
+   <groupId>secondlc</groupId>
+   <artifactId>secondlc</artifactId>
+   <version>1.0-SNAPSHOT</version>
+   <packaging>jar</packaging>
+
+   <name>secondlc</name>
+
+   <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+      <byteman-submit.version>2.1.2</byteman-submit.version>
+      <caliper.version>1.0-SNAPSHOT</caliper.version>
+      <hibernate.version>4.2.0.Final</hibernate.version>
+      <h2.version>1.2.145</h2.version>
+      <jbossjta.version>4.16.4.Final</jbossjta.version>
+      <junit.version>4.10</junit.version>
+      <junit-benchmarks.version>0.6.0</junit-benchmarks.version>
+   </properties>
+
+   <dependencies>
+
+      <dependency>
+         <groupId>org.jboss.spec</groupId>
+         <artifactId>jboss-javaee-web-6.0</artifactId>
+         <version>3.0.0.Final</version>
+         <type>pom</type>
+         <scope>provided</scope>
+         <exclusions>
+            <exclusion>
+               <groupId>xalan</groupId>
+               <artifactId>xalan</artifactId>
+            </exclusion>
+         </exclusions>
+      </dependency>
+
+      <!-- Standalone -->
+      <dependency>
+         <groupId>org.hibernate</groupId>
+         <artifactId>hibernate-core</artifactId>
+         <version>${hibernate.version}</version>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.hibernate</groupId>
+         <artifactId>hibernate-entitymanager</artifactId>
+         <version>${hibernate.version}</version>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.hibernate</groupId>
+         <artifactId>hibernate-infinispan</artifactId>
+         <version>${hibernate.version}</version>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.jboss.jbossts</groupId>
+         <artifactId>jbossjta</artifactId>
+         <version>${jbossjta.version}</version>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>com.h2database</groupId>
+         <artifactId>h2</artifactId>
+         <version>${h2.version}</version>
+         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <version>${junit.version}</version>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>com.carrotsearch</groupId>
+         <artifactId>junit-benchmarks</artifactId>
+         <version>${junit-benchmarks.version}</version>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.jboss.byteman</groupId>
+         <artifactId>byteman-submit</artifactId>
+         <version>${byteman-submit.version}</version>
+         <scope>test</scope>
+      </dependency>
+
+      <!-- Managed -->
+      <dependency>
+         <groupId>org.jboss.arquillian.junit</groupId>
+         <artifactId>arquillian-junit-container</artifactId>
+         <scope>test</scope>
+      </dependency>
+
+   </dependencies>
+
+   <dependencyManagement>
+      <dependencies>
+         <dependency>
+            <groupId>org.jboss.arquillian</groupId>
+            <artifactId>arquillian-bom</artifactId>
+            <version>1.0.3.Final</version>
+            <scope>import</scope>
+            <type>pom</type>
+         </dependency>
+      </dependencies>
+   </dependencyManagement>
+
+   <profiles>
+      <profile>
+         <id>arquillian-jbossas-managed</id>
+         <dependencies>
+            <dependency>
+               <groupId>org.jboss.as</groupId>
+               <artifactId>jboss-as-arquillian-container-managed</artifactId>
+               <version>7.1.1.Final</version>
+               <scope>test</scope>
+               <exclusions>
+                  <exclusion>
+                     <groupId>log4j</groupId>
+                     <artifactId>log4j</artifactId>
+                  </exclusion>
+               </exclusions>
+            </dependency>
+         </dependencies>
+         <build>
+            <testResources>
+               <testResource>
+                  <directory>src/test/resources</directory>
+               </testResource>
+            </testResources>
+         </build>
+      </profile>
+   </profiles>
+
+   <build>
+      <plugins>
+         <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>2.3.2</version>
+            <configuration>
+               <source>1.6</source>
+               <target>1.6</target>
+            </configuration>
+         </plugin>
+         <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>2.12</version>
+         </plugin>
+      </plugins>
+   </build>
+
+</project>

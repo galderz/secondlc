@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<arquillian xmlns="http://jboss.org/schema/arquillian" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://jboss.org/schema/arquillian http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
+
+   <container qualifier="jboss" default="true">
+      <configuration>
+         <property name="jbossHome">/opt/jboss-as-7.1.1.Final</property>
+         <!--
+         <property name="javaVmArguments">-Xmx512m -XX:MaxPermSize=128m -Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=y</property>
+         <property name="modulePath">${java.io.tmpdir:.}/test-module:${surefire.basedir:.}/build/target/jboss-as/modules:${surefire.basedir:.}/build/target/jboss-as/thirdparty-modules</property>
+         <property name="allowConnectingToRunningServer">true</property>
+         -->
+      </configuration>
+   </container>
+
+</arquillian>
