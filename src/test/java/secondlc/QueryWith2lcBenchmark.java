@@ -43,8 +43,8 @@ public class QueryWith2lcBenchmark extends AbstractBenchmark {
    static SessionFactory no2lcSessionFactory;
    static SessionFactory with2lcSessionFactory;
 
-   // Inject Byteman rules at runtime
-   static Submit submit;
+//   // Inject Byteman rules at runtime
+//   static Submit submit;
 
    @Test
    public void timeQueryNo2lc() throws Exception {
@@ -101,8 +101,8 @@ public class QueryWith2lcBenchmark extends AbstractBenchmark {
       // Insert entities
       insertReadOnlyEntities(FAMILY_TITLES, no2lcSessionFactory);
 
-      submit = new Submit();
-      addBytemanRulesIfPresent(submit);
+//      submit = new Submit();
+//      addBytemanRulesIfPresent(submit);
    }
 
    private static SessionFactory create2lcSessionFactory() {
@@ -122,9 +122,9 @@ public class QueryWith2lcBenchmark extends AbstractBenchmark {
       return sf.getStatistics().getQueryStatistics("from Family");
    }
 
-   @AfterClass
-   public static void afterClass() throws Exception {
-      deleteBytemanRulesIfPresent(submit);
-   }
+//   @AfterClass
+//   public static void afterClass() throws Exception {
+//      deleteBytemanRulesIfPresent(submit);
+//   }
 
 }

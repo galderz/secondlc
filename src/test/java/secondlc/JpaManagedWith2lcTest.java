@@ -42,6 +42,13 @@ import static secondlc.Util.statsQuery;
 @RunWith(Arquillian.class)
 public class JpaManagedWith2lcTest {
 
+   static final String[] FAMILY_TITLES = {
+         "Socrates",
+         "Zico",
+         "Falcao",
+         "Eder",
+   };
+
    static String DEPLOYMENT_NAME = "test.war";
    static String PERSISTENCE_UNIT_NAME = "jpa2lc-unit";
    static String FAMILY_REGION_NAME = String.format(
@@ -52,16 +59,10 @@ public class JpaManagedWith2lcTest {
    public static Archive<?> createDeployment() {
       return ShrinkWrap.create(WebArchive.class, "test.war")
             .addPackage(Family.class.getPackage())
+            .addClass(Util.class)
             .addAsResource("persistence-managed.xml", "META-INF/persistence.xml")
             .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
    }
-
-   static final String[] FAMILY_TITLES = {
-         "Socrates",
-         "Zico",
-         "Falcao",
-         "Eder",
-   };
 
    @PersistenceContext
    EntityManager em;

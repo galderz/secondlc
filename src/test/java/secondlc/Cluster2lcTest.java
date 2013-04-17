@@ -15,9 +15,8 @@ import javax.transaction.TransactionManager;
 
 import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.logging.LogManager;
 
-import static org.jgroups.util.Util.assertTrue;
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static secondlc.Util.*;
 
@@ -28,6 +27,13 @@ import static secondlc.Util.*;
  * @since // TODO
  */
 public class Cluster2lcTest {
+
+   static final String[] FAMILY_TITLES = {
+         "Socrates",
+         "Zico",
+         "Falcao",
+         "Eder",
+   };
 
    static TransactionManager tm = com.arjuna.ats.jta.TransactionManager.transactionManager();
    static SessionFactory sf1;
@@ -138,12 +144,12 @@ public class Cluster2lcTest {
 
    @BeforeClass
    public static void beforeClass() throws Exception {
-//      // Avoid Hibernate log polluting output
-//      LogManager.getLogManager().reset();
+      // Avoid Hibernate log polluting output
+      LogManager.getLogManager().reset();
 
       sf1 = create2lcSessionFactory();
       sf2 = create2lcSessionFactory();
-      insertTransactionalEntities(JpaManagedWith2lcTest.FAMILY_TITLES, sf1, tm);
+      insertTransactionalEntities(FAMILY_TITLES, sf1, tm);
    }
 
    static SessionFactory create2lcSessionFactory() {

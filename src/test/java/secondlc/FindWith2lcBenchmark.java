@@ -42,8 +42,8 @@ public class FindWith2lcBenchmark extends AbstractBenchmark {
          "Eder",
    };
 
-   // Inject Byteman rules at runtime
-   static Submit submit;
+//   // Inject Byteman rules at runtime
+//   static Submit submit;
 
    @Test
    public void timeFindNo2lc() throws Exception {
@@ -98,8 +98,8 @@ public class FindWith2lcBenchmark extends AbstractBenchmark {
       // Insert entities
       insertReadOnlyEntities(FAMILY_TITLES, no2lcSessionFactory);
 
-      submit = new Submit();
-      addBytemanRulesIfPresent(submit);
+//      submit = new Submit();
+//      addBytemanRulesIfPresent(submit);
    }
 
    static SessionFactory create2lcSessionFactory() {
@@ -114,10 +114,10 @@ public class FindWith2lcBenchmark extends AbstractBenchmark {
       cfg.setProperty(Environment.USE_SECOND_LEVEL_CACHE, "true");
       cfg.setProperty(Environment.CACHE_REGION_FACTORY,
             "org.hibernate.cache.infinispan.InfinispanRegionFactory");
-      cfg.setProperty(Environment.JTA_PLATFORM,
-            "org.hibernate.service.jta.platform.internal.JBossStandAloneJtaPlatform");
       cfg.setProperty(InfinispanRegionFactory.INFINISPAN_CONFIG_RESOURCE_PROP,
             "src/test/resources/infinispan-local.xml");
+      cfg.setProperty(Environment.JTA_PLATFORM,
+            "org.hibernate.service.jta.platform.internal.JBossStandAloneJtaPlatform");
 
       // 2. Configure cache settings per entity.
       configureCacheConcurrency(cfg, AccessType.READ_ONLY.getExternalName());
@@ -134,9 +134,9 @@ public class FindWith2lcBenchmark extends AbstractBenchmark {
       return cfg.buildSessionFactory();
    }
 
-   @AfterClass
-   public static void afterClass() throws Exception {
-      deleteBytemanRulesIfPresent(submit);
-   }
+//   @AfterClass
+//   public static void afterClass() throws Exception {
+//      deleteBytemanRulesIfPresent(submit);
+//   }
 
 }
