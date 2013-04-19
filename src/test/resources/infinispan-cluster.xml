@@ -38,19 +38,6 @@
                    lockingMode="OPTIMISTIC"/>
    </namedCache>
 
-   <!-- An alternative configuration for entity/collection caching that uses replication instead of invalidation -->
-   <namedCache name="replicated-entity">
-      <clustering mode="replication">
-         <stateRetrieval fetchInMemoryState="false" timeout="20000"/>
-         <sync replTimeout="20000"/>
-      </clustering>
-      <locking isolationLevel="READ_COMMITTED" concurrencyLevel="1000"
-               lockAcquisitionTimeout="15000" useLockStriping="false"/>
-      <expiration maxIdle="100000" wakeUpInterval="5000"/>
-      <transaction transactionMode="TRANSACTIONAL" autoCommit="false"
-                   lockingMode="OPTIMISTIC"/>
-   </namedCache>
-
    <!-- A config appropriate for query caching. Does not replicate queries. -->
    <namedCache name="local-query">
       <locking isolationLevel="READ_COMMITTED" concurrencyLevel="1000"
@@ -59,30 +46,6 @@
       <expiration maxIdle="100000" wakeUpInterval="5000"/>
       <transaction transactionMode="TRANSACTIONAL" autoCommit="false"
                    lockingMode="OPTIMISTIC"/>
-   </namedCache>
-
-   <!-- A query cache that replicates queries. Replication is asynchronous. -->
-   <namedCache name="replicated-query">
-      <clustering mode="replication">
-         <async/>
-      </clustering>
-      <locking isolationLevel="READ_COMMITTED" concurrencyLevel="1000"
-               lockAcquisitionTimeout="15000" useLockStriping="false"/>
-      <eviction maxEntries="10000" strategy="LRU"/>
-      <expiration maxIdle="100000" wakeUpInterval="5000"/>
-      <transaction transactionMode="TRANSACTIONAL" autoCommit="false"
-                   lockingMode="OPTIMISTIC"/>
-      <!-- State transfer forces all replication calls to be synchronous,
-           so for calls to remain async, use a cluster cache loader instead -->
-      <loaders passivation="false" shared="false" preload="false">
-         <loader class="org.infinispan.loaders.cluster.ClusterCacheLoader"
-                 fetchPersistentState="false"
-                 ignoreModifications="false" purgeOnStartup="false">
-            <properties>
-               <property name="remoteCallTimeout" value="20000"/>
-            </properties>
-         </loader>
-      </loaders>
    </namedCache>
 
    <!-- Optimized for timestamp caching. A clustered timestamp cache
