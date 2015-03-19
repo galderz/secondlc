@@ -115,7 +115,7 @@ public class FindWith2lcBenchmark extends AbstractBenchmark {
       cfg.setProperty(Environment.CACHE_REGION_FACTORY,
             "org.hibernate.cache.infinispan.InfinispanRegionFactory");
       cfg.setProperty(InfinispanRegionFactory.INFINISPAN_CONFIG_RESOURCE_PROP,
-            "src/test/resources/infinispan-local.xml");
+            "src/test/resources/infinispan-readonly-local.xml");
       cfg.setProperty(Environment.JTA_PLATFORM,
             "org.hibernate.service.jta.platform.internal.JBossStandAloneJtaPlatform");
 

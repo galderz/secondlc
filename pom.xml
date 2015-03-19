@@ -150,6 +150,9 @@
          <plugin>
             <artifactId>maven-surefire-plugin</artifactId>
             <version>2.12</version>
+            <configuration>
+               <argLine>-Djava.net.preferIPv4Stack=true -Djgroups.bind_addr=127.0.0.1</argLine>
+            </configuration>
          </plugin>
       </plugins>
    </build>

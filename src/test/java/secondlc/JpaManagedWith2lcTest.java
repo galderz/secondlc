@@ -84,6 +84,9 @@ public class JpaManagedWith2lcTest {
          List<Family> families = query.getResultList();
          System.out.println("Found " + families.size() + " families (using JPQL):");
          assertContainsAllFamilies(FAMILY_TITLES, families);
+
+         // Delay queries to get precise counts
+         Thread.sleep(1000);
       }
 
       // finally, check stats
